@@ -1,4 +1,4 @@
-package com.lsb.cr.action;
+package com.lsb.cr.login.action;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
