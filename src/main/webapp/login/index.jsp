@@ -9,16 +9,17 @@
 <html>
 <head>
 <base href="<%=basePath%>">
-<title>login page</title>
+<title>登陆</title>
 <script type="text/javascript">
-	function exit() {
-		var url = 'http://localhost:8080/chat-room/login';
-		window.location.href=url;
-		};
+	function profile() {
+		var name = document.getElementById("name").value;
+		var url = 'http://localhost:8080/chat-room/login/' + name;
+		window.location.href = url;
+	};
 </script>
 </head>
 <body>
-	你好:<%=request.getAttribute("loginUser")%>,现在时间是<%=new Date()%>
-	<input type="button" value="退出" onclick="exit()">
+	<textarea id="name"></textarea>
+	<input type="button" value="登陆" onclick="profile()">
 </body>
 </html>

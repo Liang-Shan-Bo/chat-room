@@ -18,4 +18,7 @@
 		<param-name>contextConfigLocation</param-name>
 		<param-value>classpath:spring-servlet.xml</param-value>
 	</context-param>
+	<welcome-file-list>
+		<welcome-file>login/index.jsp</welcome-file>
+	</welcome-file-list>
 </web-app>

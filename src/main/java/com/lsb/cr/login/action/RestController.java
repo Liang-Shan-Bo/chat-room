@@ -24,6 +24,6 @@ public class RestController {
 
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String registPost() {
-		return "/login";
+		return "index";
 	}
 }
