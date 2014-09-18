@@ -16,7 +16,7 @@
 	</servlet-mapping>
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
-		<param-value>classpath:spring-servlet.xml</param-value>
+		<param-value>classpath:pring-servlet1.xml</param-value>
 	</context-param>
 	<welcome-file-list>
 		<welcome-file>login/index.jsp</welcome-file>

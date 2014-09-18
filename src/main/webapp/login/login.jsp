@@ -10,11 +10,13 @@
 <head>
 <base href="<%=basePath%>">
 <title>login page</title>
+<link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<script src="/bootstrap/js/bootstrap.min.js"></script>
 <script type="text/javascript">
 	function exit() {
 		var url = 'http://localhost:8080/chat-room/login';
-		window.location.href=url;
-		};
+		window.location.href = url;
+	};
 </script>
 </head>
 <body>
