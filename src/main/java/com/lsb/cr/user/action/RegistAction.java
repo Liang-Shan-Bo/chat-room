@@ -15,31 +15,36 @@ import org.springframework.web.servlet.ModelAndView;
 import com.lsb.cr.user.dao.UserDao;
 
 @RestController
-public class LoginAction {
-	public LoginAction() {
+public class RegistAction {
+	public RegistAction() {
 	}
 
-	@RequestMapping(value = "/login/{id}/{password}", method = RequestMethod.GET)
+	@RequestMapping(value = "/login/regist", method = RequestMethod.GET)
+	public String registPost() {
+		return "regist";
+	}
+
+	@RequestMapping(value = "/regist/{id}/{password}/{name}", method = RequestMethod.GET)
 	public ModelAndView login(HttpServletRequest request,
 			HttpServletResponse response, @PathVariable("id") String id,
-			@PathVariable("password") String password, ModelMap modelMap)
+			@PathVariable("password") String password,
+			@PathVariable("name") String name, ModelMap modelMap)
 			throws Exception {
-		String loginResult;
+		String registResult;
 		ApplicationContext ac = new ClassPathXmlApplicationContext(
 				"applicationContext.xml");
 		UserDao userdao = (UserDao) ac.getBean("userdao");
-		if (userdao.find(id, password) == 0) {
-			loginResult = "账号不存在";
-		} else {
-			modelMap.put("loginUser", id);
-			return new ModelAndView("/login/login", modelMap);
+		if (userdao.isExistId(id) == 1) {
+			registResult = "账号已存在";
+		} else if (userdao.isExistName(name) == 1){
+			registResult = "昵称已存在";
+		}else {
+			userdao.regist(id, password, name);
+			registResult = "注册成功";
+			modelMap.put("loginResult", registResult);
+			return new ModelAndView("/login/index", modelMap);
 		}
-		modelMap.put("loginResult", loginResult);
-		return new ModelAndView("/login/index", modelMap);
-	}
-
-	@RequestMapping(value = "/login", method = RequestMethod.GET)
-	public String loginPost() {
-		return "index";
+		modelMap.put("registResult", registResult);
+		return new ModelAndView("/login/regist", modelMap);
 	}
 }

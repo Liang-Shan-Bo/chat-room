@@ -1,0 +1,8 @@
+DROP TABLE IF EXISTS t_user;
+CREATE TABLE `t_user` (
+  `ID` varchar(50) NOT NULL,
+  `PASSWORD` varchar(50) NOT NULL,
+  `NAME` varchar(255) NOT NULL,
+  `CREATETIME` datetime DEFAULT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8
