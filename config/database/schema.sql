@@ -1,0 +1,1 @@
+CREATE SCHEMA `chat_room` DEFAULT CHARACTER SET utf8 ;

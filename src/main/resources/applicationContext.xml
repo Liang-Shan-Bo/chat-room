@@ -23,27 +23,33 @@
 		<property name="url" value="${jdbc.url}" />
 		<property name="username" value="${jdbc.username}" />
 		<property name="password" value="${jdbc.password}" />
+		<property name="defaultAutoCommit" value="false" />
 
 	</bean>
 	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
 		<property name="dataSource" ref="dataSource"></property>
 	</bean>
 	<context:property-placeholder location="classpath:jdbc.properties" />
-	<bean id="userdao" class="com.lsb.cr.user.dao.UserDao">
-		<property name="jdbcTemplate" ref="jdbcTemplate"></property>
-	</bean>
 
 	<!-- 启用spring mvc 注解 -->
 	<context:annotation-config />
-	<!-- 设置使用注解的类所在的jar包 -->
-	<context:component-scan base-package="controller"></context:component-scan>
+
+	<bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+	<tx:annotation-driven transaction-manager="txManager"/>
+
 	<!-- 完成请求和注解POJO的映射 -->
 	<bean
 		class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter" />
-	<!-- 对转向页面的路径解析。prefix：前缀， suffix：后缀 -->
-	<bean
-		class="org.springframework.web.servlet.view.InternalResourceViewResolver"
-		p:suffix=".jsp" />
+
+	<bean id="jspViewResolver"
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="viewClass"
+			value="org.springframework.web.servlet.view.JstlView" />
+		<property name="prefix" value="/WEB-INF/views/" />
+		<property name="suffix" value=".jsp" />
+	</bean>
 	<!-- 配置http请求的json映射消息转换器 -->
 	<bean id="mappingJacksonHttpMessageConverter"
 		class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">

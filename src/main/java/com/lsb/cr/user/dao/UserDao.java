@@ -2,18 +2,12 @@ package com.lsb.cr.user.dao;
 
 import java.util.Date;
 
-import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Repository;
 
-public class UserDao {
-	private JdbcTemplate jdbcTemplate;
+import com.lsb.cr.core.CrAbstractDao;
 
-	public JdbcTemplate getJdbcTemplate() {
-		return jdbcTemplate;
-	}
-
-	public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
-		this.jdbcTemplate = jdbcTemplate;
-	}
+@Repository
+public class UserDao extends CrAbstractDao {
 
 	public Integer find(String id, String pwd) {
 		return jdbcTemplate.queryForObject(
@@ -21,19 +15,19 @@ public class UserDao {
 				Integer.class, id, pwd);
 	}
 
-	public Integer isExistId(String id) {
+	public Integer conutById(String id) {
 		return jdbcTemplate.queryForObject(
 				"select count(*) from t_user where id = ?", Integer.class, id);
 	}
-	public Integer isExistName(String name) {
+	public Integer conutByName(String name) {
 		return jdbcTemplate.queryForObject(
 				"select count(*) from t_user where name = ?", Integer.class, name);
 	}
 
-	public void regist(String id, String pwd, String name) {
+	public void insertUser(String id, String pwd, String name) {
 		this.jdbcTemplate
 				.update("insert into t_user (id, password, name, createtime) values (?, ?, ?, ?)",
-						id, pwd, name, new Date());
+						id, pwd, name, new Date());//TODO use db timestamp
 	}
 
 }

@@ -3,25 +3,28 @@ package com.lsb.cr.user.action;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.lsb.cr.user.dao.UserDao;
+import com.lsb.cr.user.service.UserService;
 
-@RestController
+@Controller
 public class RegistAction {
+	
+	@Autowired
+	private UserService userService;
+	
 	public RegistAction() {
 	}
 
 	@RequestMapping(value = "/login/regist", method = RequestMethod.GET)
 	public String registPost() {
-		return "regist";
+		return "login/regist";
 	}
 
 	@RequestMapping(value = "/regist/{id}/{password}/{name}", method = RequestMethod.GET)
@@ -31,16 +34,14 @@ public class RegistAction {
 			@PathVariable("name") String name, ModelMap modelMap)
 			throws Exception {
 		String registResult;
-		ApplicationContext ac = new ClassPathXmlApplicationContext(
-				"applicationContext.xml");
-		UserDao userdao = (UserDao) ac.getBean("userdao");
-		if (userdao.isExistId(id) == 1) {
-			registResult = "ÕËºÅÒÑ´æÔÚ";
-		} else if (userdao.isExistName(name) == 1){
-			registResult = "êÇ³ÆÒÑ´æÔÚ";
+		
+		if (userService.isExistId(id) == 1) {
+			registResult = "ï¿½Ëºï¿½ï¿½Ñ´ï¿½ï¿½ï¿½";
+		} else if (userService.isExistName(name) == 1){
+			registResult = "ï¿½Ç³ï¿½ï¿½Ñ´ï¿½ï¿½ï¿½";
 		}else {
-			userdao.regist(id, password, name);
-			registResult = "×¢²á³É¹¦";
+			userService.regist(id, password, name);
+			registResult = "×¢ï¿½ï¿½É¹ï¿½";
 			modelMap.put("loginResult", registResult);
 			return new ModelAndView("/login/index", modelMap);
 		}
