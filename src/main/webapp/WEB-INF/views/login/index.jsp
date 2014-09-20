@@ -1,44 +1,66 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%
-	String path = request.getContextPath();
-%>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<!DOCTYPE html>
 <html>
 <head>
-<title>主页</title>
-<script language="javascript"
-	src="<%=path%>/bootstrap/js/bootstrap.min.js"></script>
-<link rel="stylesheet" type="text/css"
-	href="<%=path%>/bootstrap/jcss/bootstrap.min.css" />
-<script type="text/javascript">
+<%@ include file="/WEB-INF/views/includes.jsp"%>
+<title><spring:message code="app.name" /></title>
+<style>
+body {
+  padding-top: 40px;
+  padding-bottom: 40px;
+  background-color: #eee;
+}
 
-	function profile() {
-		var id = document.getElementById("id").value;
-		var pwd = document.getElementById("pwd").value;
-		var url;
-		if(id == null || id == "" || pwd == null || pwd == ""){
-			url = '<%=path%>/login/';
-		}else{
-			url = '<%=path%>/login/' + id +'/' + pwd;
-			};
-		window.location.href = url;
-	};
-	function regist() {
-		var url = '<%=path%>/login/regist';
-		window.location.href = url;
-	};
-	function findpwd() {
-		var url = '<%=path%>/login/findpwd.jsp';
-		window.location.href = url;
-	};
-</script>
+.form-signin {
+  max-width: 330px;
+  padding: 15px;
+  margin: 0 auto;
+}
+.form-signin .form-signin-heading,
+.form-signin .checkbox {
+  margin-bottom: 10px;
+}
+.form-signin .checkbox {
+  font-weight: normal;
+}
+.form-signin .form-control {
+  position: relative;
+  height: auto;
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+  padding: 10px;
+  font-size: 16px;
+}
+.form-signin .form-control:focus {
+  z-index: 2;
+}
+.form-signin input[type="email"] {
+  margin-bottom: -1px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+.form-signin input[type="password"] {
+  margin-bottom: 10px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+</style>
 </head>
 <body>
-	账号：<input type="text" id="id" /><br /> 
-	密码：<input type="password" id="pwd" /><br />
-	<input type="button" value="登陆" onclick="profile()" />
-	<input type="button" value="注册" onclick="regist()" />
-	<input type="button" value="忘记密码" onclick="findpwd()" /><br />
-	<label id="loginresult"><%=request.getAttribute("loginResult")%></label>
+    <div class="container">
+      <form class="form-signin" role="form">
+        <h2 class="form-signin-heading">Please sign in</h2>
+        <input name="username" type="text" class="form-control" placeholder="User Name" required="" autofocus="" autocomplete="off">
+        <input name="password" type="password" class="form-control" placeholder="Password" required="">
+        <!-- 
+        <label class="checkbox">
+          <input type="checkbox" value="remember-me"> Remember me
+        </label>
+         -->
+        <button class="btn btn-lg btn-primary btn-block" type="submit" >Sign in</button>
+        <br />
+      </form>
+    </div> <!-- /container -->
 </body>
 </html>

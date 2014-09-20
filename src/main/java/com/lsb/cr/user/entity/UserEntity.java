@@ -1,8 +1,21 @@
 package com.lsb.cr.user.entity;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+
 public class UserEntity {
+	
+	@NotNull
+	@Size(max=50, min=2)
 	private int id;
+	
+	@NotNull
+	@Size(max=50, min=2)
 	private String name;
+	
+	@NotNull
+	@Size(max=50, min=2)
 	private String pwd;
 
 	public UserEntity() {

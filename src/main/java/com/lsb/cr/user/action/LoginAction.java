@@ -22,8 +22,7 @@ public class LoginAction {
 	public LoginAction() {
 	}
 	
-	//FIXME password 不能用get方式 暴露了。。。
-	@RequestMapping(value = "/login/{id}/{password}", method = RequestMethod.GET)
+	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public ModelAndView login(HttpServletRequest request,
 			HttpServletResponse response, @PathVariable("id") String id,
 			@PathVariable("password") String password, ModelMap modelMap)
