@@ -1,11 +1,25 @@
 package com.lsb.cr.user.entity;
 
+import java.util.Collection;
+
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.User;
 
-public class UserEntity {
+
+public class UserEntity extends User {
 	
+	public UserEntity(String username, String password, boolean enabled,
+			boolean accountNonExpired, boolean credentialsNonExpired,
+			boolean accountNonLocked,
+			Collection<? extends GrantedAuthority> authorities) {
+		super(username, password, enabled, accountNonExpired, credentialsNonExpired,
+				accountNonLocked, authorities);
+		// TODO Auto-generated constructor stub
+	}
+
 	@NotNull
 	@Size(max=50, min=2)
 	private int id;
@@ -17,20 +31,6 @@ public class UserEntity {
 	@NotNull
 	@Size(max=50, min=2)
 	private String pwd;
-
-	public UserEntity() {
-	}
-
-	public UserEntity(int id, String name, String pwd) {
-		this.id = id;
-		this.name = name;
-		this.pwd = pwd;
-	}
-
-	public UserEntity(String name, String pwd) {
-		this.name = name;
-		this.pwd = pwd;
-	}
 
 	public int getId() {
 		return id;
