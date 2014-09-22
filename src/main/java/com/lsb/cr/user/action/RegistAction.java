@@ -1,16 +1,23 @@
 package com.lsb.cr.user.action;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.authentication.WebAuthenticationDetails;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.ModelAndView;
 
+import com.lsb.cr.user.entity.User;
 import com.lsb.cr.user.service.UserService;
 
 @Controller
@@ -19,33 +26,50 @@ public class RegistAction {
 	@Autowired
 	private UserService userService;
 	
-	public RegistAction() {
-	}
-
-	@RequestMapping(value = "/login/regist", method = RequestMethod.GET)
-	public String registPost() {
+	@Autowired
+	@Qualifier("org.springframework.security.authenticationManager")
+    protected AuthenticationManager authenticationManager;
+	
+	@RequestMapping(value = "/regist", method = RequestMethod.GET)
+	public String registPost(@ModelAttribute("registUser") User user, BindingResult result, Model model) {
+		model.addAttribute("registUser", user);
 		return "login/regist";
 	}
 
-	@RequestMapping(value = "/regist/{id}/{password}/{name}", method = RequestMethod.GET)
-	public ModelAndView login(HttpServletRequest request,
-			HttpServletResponse response, @PathVariable("id") String id,
-			@PathVariable("password") String password,
-			@PathVariable("name") String name, ModelMap modelMap)
+	@RequestMapping(value = "/doRegist", method = RequestMethod.POST)
+	public String doRegist(@ModelAttribute("registUser") @Valid User user, 
+			BindingResult result, HttpServletRequest request, Model model)
 			throws Exception {
-		String registResult;
 		
-		if (userService.isExistId(id) == 1) {
-			registResult = "�˺��Ѵ���";
-		} else if (userService.isExistName(name) == 1){
-			registResult = "�ǳ��Ѵ���";
-		}else {
-			userService.regist(id, password, name);
-			registResult = "ע��ɹ�";
-			modelMap.put("loginResult", registResult);
-			return new ModelAndView("/login/index", modelMap);
+		userService.validate(user, result);
+		
+		
+		if(result.hasErrors() ){
+			model.addAttribute("registerUser", user);
+			return "login/regist";
 		}
-		modelMap.put("registResult", registResult);
-		return new ModelAndView("/login/regist", modelMap);
+		
+		userService.regist(user);
+		
+		//do login
+		this.authenticateUserAndSetSession(user, request);
+		
+		return "redirect:/top";
+		
+	}
+	
+	private void authenticateUserAndSetSession(User user, HttpServletRequest request) {
+		
+		UsernamePasswordAuthenticationToken token = 
+				new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword());
+
+		// generate session if one doesn't exist
+		request.getSession();
+
+		token.setDetails(new WebAuthenticationDetails(request));
+		Authentication authenticatedUser = authenticationManager
+				.authenticate(token);
+
+		SecurityContextHolder.getContext().setAuthentication(authenticatedUser);
 	}
 }

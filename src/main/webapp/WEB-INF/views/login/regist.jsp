@@ -1,42 +1,24 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%
-	String path = request.getContextPath();
-%>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<!DOCTYPE html>
 <html>
 <head>
-<title>注册</title>
-<script language="javascript" src="<%=path%>/bootstrap/js/bootstrap.min.js"></script>
-<link rel="stylesheet" type="text/css" href="<%=path%>/bootstrap/jcss/bootstrap.min.css" />
-<script type="text/javascript">
-
-	function regist() {
-		var id = document.getElementById("id").value;
-		var pwd = document.getElementById("pwd").value;
-		var cfmpwd = document.getElementById("cfmpwd").value;
-		var name = document.getElementById("name").value;
-		if (id == null || id == "" || pwd == null || pwd == "" || cfmpwd == null || cfmpwd == "" || name == null || name == "") {
-			document.getElementById("registresult").innerText="不能空啊";
-		}else if (pwd != cfmpwd) {
-			document.getElementById("registresult").innerText="密码不同";
-		}else {
-			var url = '<%=path%>/regist/' + id + '/' + pwd + '/' + name;
-			window.location.href = url;
-		}
-	};
-	function cancel() {
-		var url = '<%=path%>/login/';
-		window.location.href = url;
-	};
-</script>
+<%@ include file="/WEB-INF/views/includes.jsp"%>
+<title><spring:message code="login.register" /></title>
 </head>
 <body>
-	账号：<input type="text" id="id"/><br/>
-	昵称：<input type="text" id="name"/><br/>
-	密码：<input type="password" id="pwd"/><br/>
-	确认：<input type="password" id="cfmpwd"/><br/>
-	<input type="button" value="提交" onclick="regist()"/>
-	<input type="button" value="返回" onclick="cancel()"/><br/>
-	<label id="registresult"><%=request.getAttribute("registResult")%></label>
+    <div class="container"> 
+    <c:url value="/doRegist" var="registerAction" />
+      <form:form cssClass="form-signin" action="${registerAction }" modelAttribute="registUser" method="post" >
+        <h2 class="form-signin-heading">register</h2>
+        <form:input path="username"  name="username" type="text" class="form-control" placeholder="User Name" required=""  />
+        <form:errors path="username" cssErrorClass="errors"/>
+        <form:input path="password" type="password" class="form-control" placeholder="Password" required="" />
+        <form:errors path="password" cssErrorClass="errors"/>
+        <form:input path="passwordConfirm" type="password" class="form-control" placeholder="Password Confirm" required="" />
+        <form:errors path="passwordConfirm" cssErrorClass="errors"/>
+        <input class="btn btn-lg btn-primary btn-block" type="submit" value="Register" >
+        <br />
+        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+      </form:form>
+    </div> <!-- /container -->
 </body>
 </html>

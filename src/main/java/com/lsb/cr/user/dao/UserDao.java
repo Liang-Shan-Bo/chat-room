@@ -1,33 +1,26 @@
 package com.lsb.cr.user.dao;
 
-import java.util.Date;
-
 import org.springframework.stereotype.Repository;
 
 import com.lsb.cr.core.CrAbstractDao;
+import com.lsb.cr.user.entity.User;
 
 @Repository
 public class UserDao extends CrAbstractDao {
 
-	public Integer find(String id, String pwd) {
-		return jdbcTemplate.queryForObject(
-				"select count(*) from t_user where id = ? and password = ?",
-				Integer.class, id, pwd);
-	}
-
-	public Integer conutById(String id) {
-		return jdbcTemplate.queryForObject(
-				"select count(*) from t_user where id = ?", Integer.class, id);
-	}
 	public Integer conutByName(String name) {
 		return jdbcTemplate.queryForObject(
-				"select count(*) from t_user where name = ?", Integer.class, name);
+				"select count(*) from t_users where username = ?", Integer.class, name);
 	}
 
-	public void insertUser(String id, String pwd, String name) {
-		this.jdbcTemplate
-				.update("insert into t_user (id, password, name, createtime) values (?, ?, ?, ?)",
-						id, pwd, name, new Date());//TODO use db timestamp
+	public void insertUser(User user) {
+		this.jdbcTemplate.update("insert into t_users (username, password) values (?, ?)",
+						user.getUsername(), user.getPassword());
+	}
+
+	public void insertAuth(User user) {
+		this.jdbcTemplate.update("INSERT INTO t_user_roles (username, ROLE) VALUES (?, 'ROLE_USER');",
+				user.getUsername());
 	}
 
 }
