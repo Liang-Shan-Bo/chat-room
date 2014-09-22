@@ -6,7 +6,7 @@
 </head>
 <body>
 	<div class="container">
-		<sec:authorize ifNotGranted="ROLE_ADMIN, ROLE_USER">
+		<sec:authorize ifNotGranted="ROLE_USER">
 		<a href="<c:url value='/login' />">login</a>
 		</sec:authorize>
 
@@ -22,10 +22,8 @@
 					document.getElementById("logoutForm").submit();
 				}
 			</script>
-			<c:if test="${pageContext.request.userPrincipal.name != null}">
 				hello!<br /> 
 				<sec:authentication property="principal.username" /> | <a href="javascript:formSubmit()"> Logout</a>
-			</c:if>
 		</sec:authorize>
 
 	</div>
