@@ -1,7 +1,8 @@
 package com.lsb.cr.user.action;
 
+import java.security.Principal;
+
 import javax.servlet.http.HttpServletRequest;
-import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -31,13 +32,16 @@ public class RegistAction {
     protected AuthenticationManager authenticationManager;
 	
 	@RequestMapping(value = "/regist", method = RequestMethod.GET)
-	public String registPost(@ModelAttribute("registUser") User user, BindingResult result, Model model) {
+	public String registPost(@ModelAttribute("registUser") User user, Principal principal, BindingResult result, Model model) {
+		if (principal != null) {
+			return "redirect:/top";
+		}
 		model.addAttribute("registUser", user);
 		return "login/regist";
 	}
 
 	@RequestMapping(value = "/doRegist", method = RequestMethod.POST)
-	public String doRegist(@ModelAttribute("registUser") @Valid User user, 
+	public String doRegist(@ModelAttribute("registUser") User user, 
 			BindingResult result, HttpServletRequest request, Model model)
 			throws Exception {
 		

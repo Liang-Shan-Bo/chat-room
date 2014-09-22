@@ -22,9 +22,9 @@ public class UserService extends CrAbstractService {
 		String passwordConfirm = user.getPasswordConfirm().trim();
 		
 		if ("".equals(username)) {
-			errors.rejectValue("name", "error.required");
+			errors.rejectValue("username", "error.required");
 		}else if(this.isExistName(username)){
-			errors.rejectValue("name", "error.existed");
+			errors.rejectValue("username", "error.existed");
 		}
 		
 		
