@@ -38,7 +38,7 @@
 			</div><!--/.nav-collapse -->
       </div>
     </div>
-     <div class="container">
+     <div class="" style="margin-bottom: 20px;">
 
       <div class="starter-template">
 		<sec:authorize access="hasRole('ROLE_USER')">

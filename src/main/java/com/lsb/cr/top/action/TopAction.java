@@ -16,5 +16,16 @@ public class TopAction {
 		return model;
 
 	}
+	
+	@RequestMapping(value = { "/403" }, method = RequestMethod.GET)
+	public ModelAndView accessDeniedPage() {
+		ModelAndView model = new ModelAndView();
+		model.addObject("test", "test");
+		model.setViewName("403");
+		return model;
+
+	}
+	
+	
 
 }
