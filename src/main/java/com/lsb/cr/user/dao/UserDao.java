@@ -1,5 +1,9 @@
 package com.lsb.cr.user.dao;
 
+import java.util.List;
+
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import com.lsb.cr.core.CrAbstractDao;
@@ -23,4 +27,8 @@ public class UserDao extends CrAbstractDao {
 				user.getUsername());
 	}
 
+	public List<User> getUsers(){
+		RowMapper<User> rowMapper = new BeanPropertyRowMapper<User>(User.class);
+		return this.jdbcTemplate.query("select * from t_users", rowMapper);
+	}
 }
