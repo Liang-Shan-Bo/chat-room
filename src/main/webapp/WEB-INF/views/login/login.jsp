@@ -10,7 +10,7 @@
       <form class="form-signin" role="form" name="loginForm" action="<c:url value='/doLogin' />" method="post">
         <h2 class="form-signin-heading">Please sign in</h2>
         <c:if test="${not empty error}">
-			<div class="error">${error}</div>
+			<div class="error"><spring:message code="login.error" /></div>
 		</c:if>
         <input name="username" type="text" class="form-control" placeholder="User Name" required="" autofocus="" autocomplete="off">
         <input name="password" type="password" class="form-control" placeholder="Password" required="">

@@ -3,6 +3,7 @@ package com.lsb.cr.user.action;
 import java.security.Principal;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -23,9 +24,9 @@ public class LoginAction {
 	public ModelAndView loginError(Principal principal) {
 		ModelAndView model = new ModelAndView();
 		if (principal != null) {
-			model.setViewName("redirect:/top");
+			return new ModelAndView("redirect:/top");
 		}
-		model.addObject("error", "Invalid username and password!");
+		model.addObject("error", "true");
 		model.setViewName("login/login");
 		return model;
 	}
