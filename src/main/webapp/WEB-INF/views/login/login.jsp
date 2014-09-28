@@ -9,7 +9,7 @@
     <div class="container">
       <form class="form-signin" role="form" name="loginForm" action="<c:url value='/doLogin' />" method="post">
         <h2 class="form-signin-heading">Please sign in</h2>
-        <c:if test="${not empty error}">
+        <c:if test="${error}">
 			<div class="error"><spring:message code="login.error" /></div>
 		</c:if>
         <input name="username" type="text" class="form-control" placeholder="User Name" required="" autofocus="" autocomplete="off">
@@ -21,7 +21,9 @@
          -->
         <input class="btn btn-lg btn-primary btn-block" type="submit" value="Sign in" >
         <br />
+        <!-- 
         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+         -->
       </form>
     </div> <!-- /container -->
 </body>

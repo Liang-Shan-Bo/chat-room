@@ -47,6 +47,7 @@ public class UserService extends CrAbstractService {
 	}
 
 	public void regist(User user) {
+		logger.debug("insert into db.");
 		userDao.insertUser(user);
 		userDao.insertAuth(user);
 	}

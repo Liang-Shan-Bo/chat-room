@@ -18,7 +18,9 @@
         <form:errors path="passwordConfirm" cssErrorClass="errors"/>
         <input class="btn btn-lg btn-primary btn-block" type="submit" value="Register" >
         <br />
+        <!-- 
         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+         -->
       </form:form>
     </div> <!-- /container -->
 </body>

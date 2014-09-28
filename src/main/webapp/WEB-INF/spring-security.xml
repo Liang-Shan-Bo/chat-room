@@ -16,7 +16,9 @@
 			username-parameter="username"
 			password-parameter="password" />
 		<security:logout logout-url="/logout" logout-success-url="/" invalidate-session="true" delete-cookies="JSESSIONID" />
+		<!--  
 		<csrf/>
+		-->
 		<security:session-management session-fixation-protection="none">
 			<security:concurrency-control/>
 		</security:session-management>
