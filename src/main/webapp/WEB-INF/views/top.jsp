@@ -10,6 +10,10 @@
 		<sec:authorize ifAnyGranted="ROLE_ADMIN">
 			<a href="<c:url value='/users' />">users</a>
 		</sec:authorize>
+		<br/>
+		<sec:authorize ifAnyGranted="ROLE_ADMIN,ROLE_USER">
+			<a href="<c:url value='/channel' />">Choose the channel</a>
+		</sec:authorize>
 	</div>
 </body>
 
