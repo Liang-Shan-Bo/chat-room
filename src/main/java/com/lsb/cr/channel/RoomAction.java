@@ -10,7 +10,7 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class RoomAction {
 
-	@RequestMapping(value = { "/channel/room", "" }, method = RequestMethod.GET)
+	@RequestMapping(value = { "room", "" }, method = RequestMethod.GET)
 	public String showLoginPage(Principal principal) {
 		return "channel/room";
 	}

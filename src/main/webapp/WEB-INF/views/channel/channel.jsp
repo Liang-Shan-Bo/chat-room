@@ -10,10 +10,10 @@
       <form class="form-signin" role="form" name="loginForm" action="<c:url value='/doLogin' />" method="post">
         <h2 class="form-signin-heading">channel</h2>
 		<dl>
-		    <dd><a href="<c:url value='/channel/room' />">channel 1</a></dd>
-		    <dd><a href="<c:url value='/channel/room' />">channel 2</a></dd>
-		    <dd><a href="<c:url value='/channel/room' />">channel 3</a></dd>
-		    <dd><a href="<c:url value='/channel/room' />">channel 4</a></dd>
+		    <dd><a href="<c:url value='/room' />">channel 1</a></dd>
+		    <dd><a href="<c:url value='/room' />">channel 2</a></dd>
+		    <dd><a href="<c:url value='/room' />">channel 3</a></dd>
+		    <dd><a href="<c:url value='/room' />">channel 4</a></dd>
 		</dl>
         <br />
         <!-- 
