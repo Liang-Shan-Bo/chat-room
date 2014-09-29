@@ -1,5 +1,7 @@
 package com.lsb.cr.channel.action;
 
+import java.security.Principal;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,7 +17,10 @@ public class ChannelAction {
 	private ChannelService channelService;
 
 	@RequestMapping(value = { "/channel" }, method = RequestMethod.GET)
-	public String showChannelPage(Model model) {
+	public String showChannelPage(Principal principal,Model model) {
+		if (principal == null) {
+			return "redirect:/top";
+		}
 		model.addAttribute("ChannelList", channelService.getChannelList());
 		return "channel/channel";
 	}
