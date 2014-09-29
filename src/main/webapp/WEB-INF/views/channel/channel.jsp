@@ -10,7 +10,7 @@
 		<ul class="nav nav-pills nav-stacked">
 			<li class="active"><a href="#">channel</a></li>
 			<c:forEach items="${ChannelList }" var="channel">
-				<li><a href="<c:url value='/room' />">${channel.channelName }</a></li>
+				<li><a href="<c:url value='/room' />">${channel.channelName } (${channel.userCount }people)</a></li>
 				<br />
 			</c:forEach>
 		</ul>
