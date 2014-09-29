@@ -10,7 +10,7 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class ChannelAction {
 
-	@RequestMapping(value = { "/channel", "" }, method = RequestMethod.GET)
+	@RequestMapping(value = { "/channel" }, method = RequestMethod.GET)
 	public String showLoginPage(Principal principal) {
 		return "channel/channel";
 	}
