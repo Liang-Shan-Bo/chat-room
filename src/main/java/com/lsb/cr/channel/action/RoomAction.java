@@ -1,4 +1,4 @@
-package com.lsb.cr.channel;
+package com.lsb.cr.channel.action;
 
 import java.security.Principal;
 
@@ -8,10 +8,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-public class ChannelAction {
+public class RoomAction {
 
-	@RequestMapping(value = { "/channel" }, method = RequestMethod.GET)
+	@RequestMapping(value = { "/room" }, method = RequestMethod.GET)
 	public String showLoginPage(Principal principal) {
-		return "channel/channel";
+		return "channel/room";
 	}
 }

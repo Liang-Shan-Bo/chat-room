@@ -5,21 +5,20 @@
 <title><spring:message code="login.title" /></title>
 </head>
 <body>
-<%@ include file="/WEB-INF/views/header.jsp" %>
-    <div class="container">
-      <form class="form-signin" role="form" name="loginForm" action="<c:url value='/doLogin' />" method="post">
-        <h2 class="form-signin-heading">channel</h2>
-		<dl>
-		    <dd><a href="<c:url value='/room' />">channel 1</a></dd>
-		    <dd><a href="<c:url value='/room' />">channel 2</a></dd>
-		    <dd><a href="<c:url value='/room' />">channel 3</a></dd>
-		    <dd><a href="<c:url value='/room' />">channel 4</a></dd>
-		</dl>
-        <br />
-        <!-- 
+	<%@ include file="/WEB-INF/views/header.jsp"%>
+	<div class="container">
+		<ul class="nav nav-pills nav-stacked">
+			<li class="active"><a href="#">channel</a></li>
+			<c:forEach items="${ChannelList }" var="channel">
+				<li><a href="<c:url value='/room' />">${channel.channelName }</a></li>
+				<br />
+			</c:forEach>
+		</ul>
+		<br />
+		<!-- 
         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
          -->
-      </form>
-    </div> <!-- /container -->
+	</div>
+	<!-- /container -->
 </body>
 </html>
