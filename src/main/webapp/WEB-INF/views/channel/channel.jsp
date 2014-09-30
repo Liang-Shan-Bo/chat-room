@@ -2,6 +2,7 @@
 <html>
 <head>
 <%@ include file="/WEB-INF/views/includes.jsp"%>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <title><spring:message code="login.title" /></title>
 </head>
 <body>
