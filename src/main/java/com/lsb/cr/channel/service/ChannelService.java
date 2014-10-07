@@ -16,6 +16,6 @@ public class ChannelService {
 	private ChannelDao channelDao;
 	
 	public List<Channel> getChannelList(){
-		return channelDao.getChannelList();
+		return channelDao.getAll();
 	}
 }

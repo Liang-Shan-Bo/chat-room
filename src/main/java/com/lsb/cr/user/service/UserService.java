@@ -43,17 +43,19 @@ public class UserService extends CrAbstractService {
 	
 
 	public boolean isExistName(String name) {
-		return userDao.conutByName(name) != 0;
+		User user= new User();
+		user.setUsername(name);
+		return userDao.getById(user) != null;
 	}
 
 	public void regist(User user) {
 		logger.debug("insert into db.");
-		userDao.insertUser(user);
+		userDao.addNew(user);
 		userDao.insertAuth(user);
 	}
 	
 	public List<User> getALLUsers(){
-		return userDao.getUsers();
+		return userDao.getAll();
 	}
 	
 }

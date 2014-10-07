@@ -8,9 +8,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.lsb.cr.channel.service.ChannelService;
-import com.lsb.cr.core.CRConstants;
+import com.lsb.cr.core.CrConstants;
 
-@Secured(CRConstants.ROLE.ROLE_USER)
+@Secured(CrConstants.ROLE.ROLE_USER)
 @Controller
 public class ChannelAction {
 

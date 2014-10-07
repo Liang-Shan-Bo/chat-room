@@ -16,4 +16,41 @@ public class ChannelDao extends CrAbstractDao {
 		RowMapper<Channel> rowMapper = new BeanPropertyRowMapper<Channel>(Channel.class);
 		return this.jdbcTemplate.query("select * from t_channel", rowMapper);
 	}
+
+	@Override
+	public Integer getCount(Object entity) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List getAll() {
+		// TODO Auto-generated method stub
+		RowMapper<Channel> rowMapper = new BeanPropertyRowMapper<Channel>(Channel.class);
+		return this.jdbcTemplate.query("select * from t_channel", rowMapper);
+	}
+
+	@Override
+	public Object getById(Object entity) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public int addNew(Object entity) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int deleteById(Object entity) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int updateById(Object entity) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 }

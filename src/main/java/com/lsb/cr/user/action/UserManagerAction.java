@@ -9,11 +9,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.lsb.cr.core.CRConstants;
+import com.lsb.cr.core.CrConstants;
 import com.lsb.cr.user.entity.User;
 import com.lsb.cr.user.service.UserService;
 
-@Secured(CRConstants.ROLE.ROLE_ADMIN)
+@Secured(CrConstants.ROLE.ROLE_ADMIN)
 @Controller
 public class UserManagerAction {
 

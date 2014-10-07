@@ -1,6 +1,6 @@
 package com.lsb.cr.core;
 
-public interface CRConstants {
+public interface CrConstants {
 
 	/**
 	 * 
