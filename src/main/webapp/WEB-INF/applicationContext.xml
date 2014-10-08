@@ -71,7 +71,10 @@
 			</list>
 		</property>
 	</bean>
-	
+	<!-- 开启jdbc事务 -->
+	<bean id="transactionManager" class="org.springframework.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource"></property>
+	</bean>
 	<bean id="localeResolver"
 		class="org.springframework.web.servlet.i18n.CookieLocaleResolver">
 		<property name="defaultLocale" value="zh_CN" />

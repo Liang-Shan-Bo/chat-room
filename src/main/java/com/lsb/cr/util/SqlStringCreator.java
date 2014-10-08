@@ -63,19 +63,10 @@ public class SqlStringCreator{
 			Field keyField = entity.getClass().getDeclaredField(keyName);
 			keyField.setAccessible(true);
 			values.add(keyField.get(entity));
-		} catch (SecurityException e) {
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} catch (IllegalArgumentException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IllegalAccessException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (NoSuchFieldException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		} 
 		return sql;
 	}
 }
