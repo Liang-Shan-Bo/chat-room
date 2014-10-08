@@ -22,7 +22,7 @@ public class SqlStringCreator{
 						condition.append(",");
 					}
 					sqlBuffer.append(name);
-					condition.append("?");
+					condition.append(":"+name);
 					properties.put(field.getName(), value);
 					begin = true;
 				}
@@ -51,8 +51,9 @@ public class SqlStringCreator{
 					if(begin){
 						sqlBuffer.append(",");
 					}
-					sqlBuffer.append(field.getName()+"=?");
-					properties.put(field.getName(), value);
+					String name = field.getName();
+					sqlBuffer.append(field.getName()+"=:"+name);
+					properties.put(name, value);
 					begin = true;
 				}
 			}
