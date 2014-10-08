@@ -45,7 +45,7 @@ public class UserService extends CrAbstractService {
 	public boolean isExistName(String name) {
 		User user= new User();
 		user.setUsername(name);
-		return userDao.getById(user) != null;
+		return userDao.getCountById(user) == 0;
 	}
 
 	public void regist(User user) {

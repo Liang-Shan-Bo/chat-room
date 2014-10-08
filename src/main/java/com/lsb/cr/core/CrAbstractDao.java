@@ -33,7 +33,7 @@ public abstract class CrAbstractDao<T> {
 		this.namedParameterJdbcTemplate = new NamedParameterJdbcTemplate(this.jdbcTemplate);
 	}
 	
-	public abstract Integer getCount(T entity);
+	public abstract Integer getCountById(T entity);
 	public abstract List<T> getAll();
 	public abstract T getById(T entity);
 	public abstract int addNew(T entity);

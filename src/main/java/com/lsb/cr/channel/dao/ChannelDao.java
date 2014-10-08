@@ -12,13 +12,13 @@ import com.lsb.cr.core.CrAbstractDao;
 @Repository
 public class ChannelDao extends CrAbstractDao {
 	
-	public List<Channel> getChannelList(){
+/*	public List<Channel> getChannelList(){
 		RowMapper<Channel> rowMapper = new BeanPropertyRowMapper<Channel>(Channel.class);
 		return this.jdbcTemplate.query("select * from t_channel", rowMapper);
 	}
-
+*/
 	@Override
-	public Integer getCount(Object entity) {
+	public Integer getCountById(Object entity) {
 		// TODO Auto-generated method stub
 		return null;
 	}
