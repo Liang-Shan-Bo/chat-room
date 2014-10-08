@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.lsb.cr.user.entity.User;
+import com.lsb.cr.user.form.UserRegisterForm;
 import com.lsb.cr.user.service.UserService;
 
 @Controller
@@ -32,7 +33,7 @@ public class RegistAction {
     protected AuthenticationManager authenticationManager;
 	
 	@RequestMapping(value = "/regist", method = RequestMethod.GET)
-	public String registPost(@ModelAttribute("registUser") User user, Principal principal, BindingResult result, Model model) {
+	public String registPost(@ModelAttribute("registUser") UserRegisterForm user, Principal principal, BindingResult result, Model model) {
 		if (principal != null) {
 			return "redirect:/top";
 		}
@@ -41,7 +42,7 @@ public class RegistAction {
 	}
 
 	@RequestMapping(value = "/doRegist", method = RequestMethod.POST)
-	public String doRegist(@ModelAttribute("registUser") User user, 
+	public String doRegist(@ModelAttribute("registUser") UserRegisterForm user, 
 			BindingResult result, HttpServletRequest request, Model model)
 			throws Exception {
 		

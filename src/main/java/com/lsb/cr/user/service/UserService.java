@@ -10,6 +10,7 @@ import org.springframework.validation.Errors;
 import com.lsb.cr.core.CrAbstractService;
 import com.lsb.cr.user.dao.UserDao;
 import com.lsb.cr.user.entity.User;
+import com.lsb.cr.user.form.UserRegisterForm;
 
 @Service
 @Transactional
@@ -18,7 +19,7 @@ public class UserService extends CrAbstractService {
 	@Autowired
 	private UserDao userDao;
 	
-	public void validate(User user, Errors errors) {
+	public void validate(UserRegisterForm user, Errors errors) {
 		String username = user.getUsername().trim();
 		String password = user.getPassword().trim();
 		String passwordConfirm = user.getPasswordConfirm().trim();

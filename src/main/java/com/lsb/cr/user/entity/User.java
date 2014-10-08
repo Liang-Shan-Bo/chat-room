@@ -8,18 +8,6 @@ public class User {
 	
 	private String password;
 	
-	private String passwordConfirm;
-
-
-	public String getPasswordConfirm() {
-		return passwordConfirm;
-	}
-
-	public void setPasswordConfirm(String passwordConfirm) {
-		this.passwordConfirm = passwordConfirm;
-	}
-
-
 	public String getPassword() {
 		return password;
 	}
