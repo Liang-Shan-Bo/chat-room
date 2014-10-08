@@ -1,7 +1,5 @@
 package com.lsb.cr.core;
 
-import java.util.List;
-
 import javax.annotation.PostConstruct;
 
 import org.apache.commons.logging.Log;
@@ -11,12 +9,14 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 
+import com.lsb.cr.util.SqlStringCreator;
+
 /**
  * 
  * @author fan
  *
  */
-public abstract class CrAbstractDao<T> {
+public abstract class CrAbstractDao {
 	
 	protected Log logger = LogFactory.getLog(getClass());
 	
@@ -33,10 +33,7 @@ public abstract class CrAbstractDao<T> {
 		this.namedParameterJdbcTemplate = new NamedParameterJdbcTemplate(this.jdbcTemplate);
 	}
 	
-	public abstract Integer getCountById(T entity);
-	public abstract List<T> getAll();
-	public abstract T getById(T entity);
-	public abstract int addNew(T entity);
-	public abstract int deleteById(T entity);
-	public abstract int updateById(T entity);
+	@Autowired
+	protected SqlStringCreator sqlStringCreator;
+	
 }

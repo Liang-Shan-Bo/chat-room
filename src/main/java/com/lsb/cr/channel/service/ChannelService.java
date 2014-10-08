@@ -8,9 +8,12 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.lsb.cr.channel.dao.ChannelDao;
 import com.lsb.cr.channel.entity.Channel;
+import com.lsb.cr.core.CrAbstractService;
+
+
 @Service
 @Transactional
-public class ChannelService {
+public class ChannelService extends CrAbstractService {
 	
 	@Autowired
 	private ChannelDao channelDao;

@@ -2,6 +2,7 @@ package com.lsb.cr.user.service;
 
 import java.util.List;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -44,19 +45,19 @@ public class UserService extends CrAbstractService {
 	
 
 	public boolean isExistName(String name) {
-		User user= new User();
-		user.setUsername(name);
-		return userDao.getCountById(user) == 0;
+		return userDao.conutByName(name) != 0;
 	}
 
 	public void regist(User user) {
-		logger.debug("insert into db.");
-		userDao.addNew(user);
-		userDao.insertAuth(user);
+		User u = new User();
+		BeanUtils.copyProperties(user, u);
+		userDao.insertUser(u);
+		userDao.insertAuth(u);
 	}
 	
 	public List<User> getALLUsers(){
-		return userDao.getAll();
+		return userDao.getUsers();
 	}
+	
 	
 }

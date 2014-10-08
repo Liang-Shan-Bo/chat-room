@@ -8,6 +8,10 @@ public class User {
 	
 	private String password;
 	
+	private boolean enabled = true;
+	
+	private String createtime = "SYSTIMESTAMP";
+	
 	public String getPassword() {
 		return password;
 	}
@@ -22,5 +26,21 @@ public class User {
 
 	public void setUsername(String username) {
 		this.username = username;
+	}
+
+	public boolean isEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
+	}
+
+	public String getCreatetime() {
+		return createtime;
+	}
+
+	public void setCreatetime(String createtime) {
+		this.createtime = createtime;
 	}
 }
