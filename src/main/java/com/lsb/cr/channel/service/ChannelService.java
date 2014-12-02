@@ -21,4 +21,8 @@ public class ChannelService extends CrAbstractService {
 	public List<Channel> getChannelList(){
 		return channelDao.getAll();
 	}
+	
+	public String getChannelName(int ChannelId) {
+		return channelDao.getChannelNameById(ChannelId);
+	}
 }
