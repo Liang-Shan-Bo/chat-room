@@ -8,7 +8,7 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class TopAction {
 
-	@RequestMapping(value = { "/", "/top**" }, method = RequestMethod.GET)
+	@RequestMapping(value = { "/", "/top**", "/room/top" }, method = RequestMethod.GET)
 	public ModelAndView defaultPage() {
 		ModelAndView model = new ModelAndView();
 		model.addObject("test", "test");
@@ -16,7 +16,7 @@ public class TopAction {
 		return model;
 
 	}
-	
+
 	@RequestMapping(value = { "/403" }, method = RequestMethod.GET)
 	public ModelAndView accessDeniedPage() {
 		ModelAndView model = new ModelAndView();
@@ -25,7 +25,5 @@ public class TopAction {
 		return model;
 
 	}
-	
-	
 
 }
