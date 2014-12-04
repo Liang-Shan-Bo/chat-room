@@ -89,6 +89,9 @@ public class SqlStringCreator{
 					begin = true;
 				}
 	
+				
+				
+				
 			} catch (IllegalArgumentException | IllegalAccessException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

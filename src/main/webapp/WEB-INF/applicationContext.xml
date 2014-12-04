@@ -4,6 +4,7 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:aop="http://www.springframework.org/schema/aop"
 	xmlns:security="http://www.springframework.org/schema/security"
+	xmlns:websocket="http://www.springframework.org/schema/websocket"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
 	           http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
 	           http://www.springframework.org/schema/mvc 
@@ -16,17 +17,18 @@
 	           http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
 	           http://www.springframework.org/schema/security
 			   http://www.springframework.org/schema/security/spring-security.xsd
+			   http://www.springframework.org/schema/websocket 
+			   http://www.springframework.org/schema/websocket/spring-websocket.xsd
 	           ">
-	           
-	           
-	<security:global-method-security pre-post-annotations="enabled" secured-annotations="enabled"  />
-	
+
+	<security:global-method-security
+		pre-post-annotations="enabled" secured-annotations="enabled" />
+
 	<context:component-scan base-package="com.lsb.cr"></context:component-scan>
 	<mvc:annotation-driven />
 	<mvc:default-servlet-handler />
 	<mvc:resources mapping="/style/**" location="/style/" />
-    <mvc:resources mapping="/script/**" location="/script/" />  
-
+	<mvc:resources mapping="/script/**" location="/script/" />
 
 	<!-- JDBC 配置 -->
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
@@ -47,13 +49,15 @@
 	<!-- 启用spring mvc 注解 -->
 	<context:annotation-config />
 
-	<bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-        <property name="dataSource" ref="dataSource"/>
-    </bean>
-	<tx:annotation-driven transaction-manager="txManager"/>
+	<bean id="txManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	<tx:annotation-driven transaction-manager="txManager" />
 
 	<!-- 完成请求和注解POJO的映射 -->
-	<bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter" />
+	<bean
+		class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter" />
 
 	<bean id="jspViewResolver"
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
@@ -72,14 +76,12 @@
 		</property>
 	</bean>
 
-	
-
 	<!-- 开启jdbc事务 -->
 	<bean id="localeResolver"
 		class="org.springframework.web.servlet.i18n.CookieLocaleResolver">
 		<property name="defaultLocale" value="zh_CN" />
 	</bean>
-		<!-- Application Message Bundle -->
+	<!-- Application Message Bundle -->
 	<bean id="messageSource"
 		class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
 		<property name="basenames">
@@ -88,7 +90,14 @@
 			</list>
 		</property>
 	</bean>
-
+	<!-- websocket处理类和握手协议的spring配置 -->
+	<bean id="websocket" class="com.lsb.cr.websocket.WebSocketEndPoint" />
+	<websocket:handlers>
+		<websocket:mapping path="/websocket" handler="websocket" />
+		<websocket:handshake-interceptors>
+			<bean class="com.lsb.cr.websocket.HandshakeInterceptor" />
+		</websocket:handshake-interceptors>
+	</websocket:handlers>
 </beans>
  
 

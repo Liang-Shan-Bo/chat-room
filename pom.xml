@@ -50,6 +50,16 @@
 			<version>${org.springframework.version}</version>
 		</dependency>
 		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-websocket</artifactId>
+			<version>${org.springframework.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-messaging</artifactId>
+			<version>${org.springframework.version}</version>
+		</dependency>
+		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-web</artifactId>
 			<version>${org.springframework.security.version}</version>
@@ -136,25 +146,23 @@
 		<finalName>chat-room</finalName>
 		<plugins>
 			<plugin>
-			  <groupId>org.mortbay.jetty</groupId>
-			  <artifactId>jetty-maven-plugin</artifactId>
-			  <!-- 
-			  <version>8.1.16.v20140903</version>
-			   -->
-			  <configuration>
-			    <webApp>
-			      <contextPath>/chat-room</contextPath>
-			    </webApp>
-			  </configuration>
+				<groupId>org.mortbay.jetty</groupId>
+				<artifactId>jetty-maven-plugin</artifactId>
+				<!-- <version>8.1.16.v20140903</version> -->
+				<configuration>
+					<webApp>
+						<contextPath>/chat-room</contextPath>
+					</webApp>
+				</configuration>
 			</plugin>
 			<plugin>
-		        <groupId>org.apache.maven.plugins</groupId>
-		        <artifactId>maven-eclipse-plugin</artifactId>
-		        <configuration>
-		          <downloadSources>true</downloadSources>
-		          <downloadJavadocs>true</downloadJavadocs>
-		        </configuration>
-		      </plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-eclipse-plugin</artifactId>
+				<configuration>
+					<downloadSources>true</downloadSources>
+					<downloadJavadocs>true</downloadJavadocs>
+				</configuration>
+			</plugin>
 		</plugins>
 	</build>
 </project>
