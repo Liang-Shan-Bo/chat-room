@@ -21,14 +21,6 @@ public class ChannelDao extends CrAbstractDao {
 		RowMapper<Channel> rowMapper = new BeanPropertyRowMapper<Channel>(Channel.class);
 		return this.jdbcTemplate.query("select * from t_channel", rowMapper);
 	}
-	
-	public String getChannelNameById(int ChannelId)
-	{
-		String channelName = (String) this.jdbcTemplate.queryForObject(
-				"select channel_name from t_channel where channel_id = ?",
-				new Object[] { ChannelId }, java.lang.String.class);
-		return channelName;
-	}
 
 	public Object getById(Object entity) {
 		// TODO Auto-generated method stub
