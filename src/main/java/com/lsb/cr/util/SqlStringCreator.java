@@ -25,6 +25,7 @@ public class SqlStringCreator{
 	
 	private ConcurrentHashMap<String, String> updateCache;
 	
+	@SuppressWarnings("unused")
 	private boolean checkCache(String key, Type type){
 		switch (type) {
 		case insert:
@@ -36,6 +37,7 @@ public class SqlStringCreator{
 		}
 	}
 	
+	@SuppressWarnings("unused")
 	private String getSql(String key, Type type){
 		switch (type) {
 		case insert:
@@ -48,6 +50,7 @@ public class SqlStringCreator{
 		}
 	}
 	
+	@SuppressWarnings("unused")
 	private void putSql(String key, String sql, Type type){
 		switch (type) {
 		case insert:

@@ -49,6 +49,7 @@
 	<!-- 启用spring mvc 注解 -->
 	<context:annotation-config />
 
+	<!-- 开启jdbc事务 -->
 	<bean id="txManager"
 		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
 		<property name="dataSource" ref="dataSource" />
@@ -76,7 +77,6 @@
 		</property>
 	</bean>
 
-	<!-- 开启jdbc事务 -->
 	<bean id="localeResolver"
 		class="org.springframework.web.servlet.i18n.CookieLocaleResolver">
 		<property name="defaultLocale" value="zh_CN" />
@@ -90,7 +90,7 @@
 			</list>
 		</property>
 	</bean>
-	<!-- websocket处理类和握手协议的spring配置 -->
+	<!-- websocket处理类和握手协议的spring配置
 	<bean id="websocket" class="com.lsb.cr.websocket.WebSocketEndPoint" />
 	<websocket:handlers>
 		<websocket:mapping path="/websocket" handler="websocket" />
@@ -98,6 +98,7 @@
 			<bean class="com.lsb.cr.websocket.HandshakeInterceptor" />
 		</websocket:handshake-interceptors>
 	</websocket:handlers>
+	 -->
 </beans>
  
 
