@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 
 import com.lsb.cr.core.CrException;
 
+@Deprecated
 @Component
 public class SqlStringCreator{
 	

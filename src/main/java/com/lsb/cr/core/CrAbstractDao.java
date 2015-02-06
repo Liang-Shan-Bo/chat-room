@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 
-import com.lsb.cr.util.SqlStringCreator;
 
 /**
  * 
@@ -33,7 +32,5 @@ public abstract class CrAbstractDao {
 		this.namedParameterJdbcTemplate = new NamedParameterJdbcTemplate(this.jdbcTemplate);
 	}
 	
-	@Autowired
-	protected SqlStringCreator sqlStringCreator;
 	
 }
