@@ -5,14 +5,14 @@ function jqGridInclude()
     // set include to false if you do not want some modules to be included
     var modules = [
         { include: true, incfile:'i18n/grid.locale-en.js'}, // jqGrid translation
-        { include: true, incfile:'grid.base.js'}, // jqGrid base
+  //      { include: true, incfile:'grid.base.js'}, // jqGrid base
         { include: true, incfile:'grid.common.js'}, // jqGrid common for editing
         { include: true, incfile:'grid.formedit.js'}, // jqGrid Form editing
         { include: true, incfile:'grid.inlinedit.js'}, // jqGrid inline editing
         { include: true, incfile:'grid.celledit.js'}, // jqGrid cell editing
         { include: true, incfile:'grid.subgrid.js'}, //jqGrid subgrid
         { include: true, incfile:'grid.treegrid.js'}, //jqGrid treegrid
-	{ include: true, incfile:'grid.grouping.js'}, //jqGrid grouping
+//	{ include: true, incfile:'grid.grouping.js'}, //jqGrid grouping
         { include: true, incfile:'grid.custom.js'}, //jqGrid custom 
         { include: true, incfile:'grid.tbltogrid.js'}, //jqGrid table to grid 
         { include: true, incfile:'grid.import.js'}, //jqGrid import

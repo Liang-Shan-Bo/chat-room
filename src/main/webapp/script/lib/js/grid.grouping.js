@@ -50,6 +50,51 @@ $.jgrid.extend({
 			} else {
 				$t.p.grouping = false;
 			}
+			
+			////////////////////
+			//modified start
+			///////////////////
+			if(!!$t.p.groupingSort){
+				var bindFlag = true;
+				$.each($("#" + $t.p.id+"_"+$t.p.colModel[0].name).data("events").click, function(i, e){
+					if(e.namespace === "group") {
+						bindFlag = false;
+						return;
+					}
+				})
+				if(bindFlag){
+					$.each($t.p.colModel, function(i){
+						$("#" + $t.p.id+"_"+$t.p.colModel[i].name).bind("click.group", function(){
+							var $this = $(this);
+			             	var so = $t.p.sortorder;
+			             	if (so === "desc") {
+								return;
+							}
+			             	if($t.p.grouping && so === "asc"){
+			 					$("span.s-ico",$this).show();
+			 					$("span.ui-icon-"+so,$this).removeClass('ui-state-disabled');
+			 					$this.attr("aria-selected","true");
+			 					$($t).jqGrid('groupingRemove',true);
+			             		return;
+			             	} 
+			             	
+			             	if(!$t.p.grouping && so === "asc"){
+			             		 $("span.ui-grid-ico-sort",$this).addClass('ui-state-disabled');
+		 	        			 $("span.s-ico",$this).hide();
+		 						 $(this).attr("aria-selected","false");
+		 	        			 $($t).jqGrid('groupingGroupBy', $t.p.groupingView.groupField);
+		 	        			 $t.p.sortorder = "desc";
+		 	        			 return;
+			             	}
+			             
+						});//end bind
+					});//end each
+				}
+			}
+			////////////////////
+			//end
+			/////////////////
+				
 		});
 	},
 	groupingPrepare : function (rData, gdata, record) {
