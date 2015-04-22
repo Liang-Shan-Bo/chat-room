@@ -15,6 +15,9 @@
 			<a href="<c:url value='/channel' />">Choose the channel</a>
 		</sec:authorize>
 	</div>
+	<div>
+		<a href="<c:url value='/showSM' />">sm</a>
+	</div>
 </body>
 
 </html>
