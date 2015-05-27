@@ -20,18 +20,18 @@
                     mtype: "GET",
                     datatype: "json",
                     colModel: [
-                        { label: 'OrderID', name: 'OrderID', key: true, width: 75},
+                        { label: 'OrderID', name: 'OrderID', key: true, width: 75, sortable:false},
      					{ label: 'Customer ID', name: 'CustomerID', width: 150 },
                         { label: 'Order Date', name: 'OrderDate', width: 150 },
                         { label: 'Freight', name: 'Freight', width: 150 },
-                        { label:'Ship Name', name: 'ShipName', width: 150 }
+                        { label:'Ship Name', name: 'ShipName', width: 150, sortable:false }
                     ],
     				loadonce:true, // just for demo purpose
                     width: 780,
-                    height: 250,
+                    height: 'auto',
                     rowNum: 10,
     				rowList:[10,25,50],
-    				sortname: 'OrderDate',
+    				sortname: 'OrderID',
                     pager: "#jqGridPager",
     				viewrecords: true,
                     grouping: true,
@@ -44,7 +44,8 @@
                         groupCollapse: false
                         
                     },
-                    groupingSort:true
+                    groupingSort:true,
+                    lastgroupsort : 0
                 };
         	
             $("#jqGrid").jqGrid(opt);

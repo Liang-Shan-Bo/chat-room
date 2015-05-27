@@ -1,4 +1,10 @@
 // Grouping module
+;$.fn.bindFirstByGrouping = function(name, fn) {
+    this.bind(name, fn);
+    var handlers = this.data('events')[name.split('.')[0]];
+    var handler = handlers.pop();
+    handlers.splice(0, 0, handler);
+}
 ;(function($){
 "use strict";
 $.jgrid.extend({
@@ -51,50 +57,6 @@ $.jgrid.extend({
 				$t.p.grouping = false;
 			}
 			
-			////////////////////
-			//modified start
-			///////////////////
-			if(!!$t.p.groupingSort){
-				var bindFlag = true;
-				$.each($("#" + $t.p.id+"_"+$t.p.colModel[0].name).data("events").click, function(i, e){
-					if(e.namespace === "group") {
-						bindFlag = false;
-						return;
-					}
-				})
-				if(bindFlag){
-					$.each($t.p.colModel, function(i){
-						$("#" + $t.p.id+"_"+$t.p.colModel[i].name).bind("click.group", function(){
-							var $this = $(this);
-			             	var so = $t.p.sortorder;
-			             	if (so === "desc") {
-								return;
-							}
-			             	if($t.p.grouping && so === "asc"){
-			 					$("span.s-ico",$this).show();
-			 					$("span.ui-icon-"+so,$this).removeClass('ui-state-disabled');
-			 					$this.attr("aria-selected","true");
-			 					$($t).jqGrid('groupingRemove',true);
-			             		return;
-			             	} 
-			             	
-			             	if(!$t.p.grouping && so === "asc"){
-			             		 $("span.ui-grid-ico-sort",$this).addClass('ui-state-disabled');
-		 	        			 $("span.s-ico",$this).hide();
-		 						 $(this).attr("aria-selected","false");
-		 	        			 $($t).jqGrid('groupingGroupBy', $t.p.groupingView.groupField);
-		 	        			 $t.p.sortorder = "desc";
-		 	        			 return;
-			             	}
-			             
-						});//end bind
-					});//end each
-				}
-			}
-			////////////////////
-			//end
-			/////////////////
-				
 		});
 	},
 	groupingPrepare : function (rData, gdata, record) {
@@ -255,6 +217,7 @@ $.jgrid.extend({
 			$("#"+$.jgrid.jqID($t.p.id)+" tbody:first").append(str);
 			// free up memory
 			str = null;
+			$(this).jqGrid('groupingSortable');
 		});
 	},
 	groupingGroupBy : function (name, options ) {
@@ -336,6 +299,68 @@ $.jgrid.extend({
 			// the same as sum, but at end we divide it
 			return parseFloat(v||0) + parseFloat((rc[field]||0));
 		}
+	},
+	groupingSortable : function () {
+		return this.each(function (){
+			var $t = this;
+			
+			if(!!$t.p.groupingSort){
+				var sortableIndex;
+				for (var i = 0; i < $t.p.colModel.length; i++) {
+					if($t.p.colModel[i].sortable){
+						sortableIndex = i;
+						break;
+					}
+
+				}
+				var bindFlag = true;
+				$.each($("#" + $t.p.id+"_"+$t.p.colModel[sortableIndex].name).data("events").click, function(i, e){
+					if(e.namespace === "group") {
+						bindFlag = false;
+						return;
+					}
+				})
+				if(bindFlag){
+					$.each($t.p.colModel, function(i){
+						if($t.p.colModel[i].sortable) {
+							$("#" + $t.p.id+"_"+$t.p.colModel[i].name).bindFirstByGrouping("click.group", function(){
+								var $this = $(this), so = $t.p.sortorder;
+								var i, headers = $t.grid.headers, ci = $.jgrid.getCellIndex(this);
+								for (i = 0; i < headers.length; i++) {
+									if (this === headers[i].el) {
+										ci = i;
+										break;
+									}
+								}
+				             	
+				             	if($t.p.grouping && so === "asc"){
+				             		$("span.s-ico",$this).show();
+				             		$("span.ui-icon-"+so,$this).removeClass('ui-state-disabled');
+				             		$this.attr("aria-selected","true");
+				             		$($t).jqGrid('groupingRemove',false);
+				             		$t.p.lastgroupsort = ci;
+				             		return;
+				             	} 
+				             	if (ci === $t.p.lastgroupsort) {
+					             	if(!$t.p.grouping && so === "asc"){
+										$("span.ui-grid-ico-sort",$this).addClass('ui-state-disabled');
+										$("span.s-ico",$this).hide();
+										$(this).attr("aria-selected","false");
+										$($t).jqGrid('groupingGroupBy', $t.p.groupingView.groupField);
+										$t.p.sortorder = "desc";
+				 	        			return;
+					             	}
+				             	}else {
+				             		$t.p.lastgroupsort = ci;
+								}
+				             
+							});//end bind
+						};//end if sortable
+					});//end each
+				}
+			}
+			//end
+		});
 	}
 });
 })(jQuery);
