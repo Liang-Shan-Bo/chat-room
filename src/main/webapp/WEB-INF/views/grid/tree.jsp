@@ -6,6 +6,8 @@
         <title>test</title>
 </head>
 <body>
+	<input id="expandAll" type="button" value="+" />
+	<input id="collapseAll" type="button" value="-" />	
 	<br/> <br/>
     <table id="jqGrid"></table>
     <div id="jqGridPager"></div>
@@ -14,6 +16,12 @@
     
         $(document).ready(function () {   	
 
+        	$("#test1").bind("bind", function(){
+        		hid = $t.p.id+"ghead_"+i;
+        		
+        	});
+        	
+        	
         	var opt = {
                 	url: '<c:url value="/g/tree1.json" />',
                     jsonReader : { repeatitems: false },
@@ -49,7 +57,8 @@
                 };
         	
             $("#jqGrid").jqGrid(opt);
-		
+            $("#jqGrid").jqGrid("groupingToggleAll", $("#expandAll"), $("#collapseAll"));
+			
         });
     </script>
 

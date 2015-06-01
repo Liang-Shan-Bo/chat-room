@@ -1,10 +1,4 @@
 // Grouping module
-;$.fn.bindFirstByGrouping = function(name, fn) {
-    this.bind(name, fn);
-    var handlers = this.data('events')[name.split('.')[0]];
-    var handler = handlers.pop();
-    handlers.splice(0, 0, handler);
-}
 ;(function($){
 "use strict";
 $.jgrid.extend({
@@ -323,7 +317,8 @@ $.jgrid.extend({
 				if(bindFlag){
 					$.each($t.p.colModel, function(i){
 						if($t.p.colModel[i].sortable) {
-							$("#" + $t.p.id+"_"+$t.p.colModel[i].name).bindFirstByGrouping("click.group", function(){
+							$("#" + $t.p.id+"_"+$t.p.colModel[i].name).bind("click.group", function(){
+							//$("#" + $t.p.id+"_"+$t.p.colModel[i].name).bindFirstByGrouping("click.group", function(){
 								var $this = $(this), so = $t.p.sortorder;
 								var i, headers = $t.grid.headers, ci = $.jgrid.getCellIndex(this);
 								for (i = 0; i < headers.length; i++) {
@@ -360,6 +355,65 @@ $.jgrid.extend({
 				}
 			}
 			//end
+		});
+	},
+	groupingToggleAll : function ($ea, $ca) {
+		return this.each(function (){
+			var $t = this, 
+			grp = $t.p.groupingView;
+			var toggle = function(type){
+				if(!$t.p.grouping){
+					return;
+				}
+				$.each(grp.sortitems[0],function(i,n){
+					var hid = $t.p.id+"ghead_"+i,
+					strpos = hid.lastIndexOf('_'),
+					uid = hid.substring(0,strpos+1),
+					num = parseInt(hid.substring(strpos+1),10)+1,
+					minus = grp.minusicon,
+					plus = grp.plusicon,
+					tar = $("#"+$.jgrid.jqID(hid)),
+					r = tar.length ? tar[0].nextSibling : null,
+					tarspan = $("#"+$.jgrid.jqID(hid)+" span."+"tree-wrap-"+$t.p.direction);
+					if( "ca" === type && tarspan.hasClass(minus)) {
+						if(grp.showSummaryOnHide && grp.groupSummary[0]) {
+							if(r){
+								while(r) {
+									if($(r).hasClass('jqfoot') ) { break; }
+									$(r).hide();
+									r = r.nextSibling;
+								}
+							}
+						} else  {
+							if(r){
+								while(r) {
+									if($(r).attr('id') ==uid+String(num) ) { break; }
+									$(r).hide();
+									r = r.nextSibling;
+								}
+							}
+						}
+						tarspan.removeClass(minus).addClass(plus);
+					} else if("ea" === type && tarspan.hasClass(plus)) {
+						if(r){
+							while(r) {
+								if($(r).attr('id') ==uid+String(num) ) { break; }
+								$(r).show();
+								r = r.nextSibling;
+							}
+						}
+						tarspan.removeClass(plus).addClass(minus);
+					}
+				});
+
+			};//end function toggle
+			
+			$ca.bind("click", function(){//collapse All
+				toggle("ca");
+			});
+			$ea.bind("click", function(){//expand All
+				toggle("ea");
+			});//end ea
 		});
 	}
 });
