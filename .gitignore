@@ -2,3 +2,6 @@
 .settings
 .classpath
 .project
+/web/
+chat-room.iml
+.idea
